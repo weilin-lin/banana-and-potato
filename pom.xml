@@ -7,6 +7,7 @@
   <version>1.0-SNAPSHOT</version>
   <name>line-chat-bot-ski</name>
   <url>http://maven.apache.org</url>
+  
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -14,6 +15,27 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+	    <groupId>com.linecorp.bot</groupId>
+		<artifactId>line-bot-spring-boot</artifactId>
+		<version>1.6.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.linecorp.bot</groupId>
+		<artifactId>line-bot-servlet</artifactId>
+		<version>1.6.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.linecorp.bot</groupId>
+		<artifactId>line-bot-model</artifactId>
+		<version>1.6.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.linecorp.bot</groupId>
+		<artifactId>line-bot-api-client</artifactId>
+		<version>1.6.0</version>
+	</dependency>
+    
   </dependencies>
   
   <build>
