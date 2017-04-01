@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 
 import com.linecorp.bot.client.LineMessagingService;
-import com.linecorp.bot.client.LineMessagingServiceBuilder;
 import com.linecorp.bot.model.ReplyMessage;
 import com.linecorp.bot.model.event.Event;
 import com.linecorp.bot.model.event.MessageEvent;
@@ -17,10 +16,6 @@ import com.linecorp.bot.spring.boot.annotation.EventMapping;
 
 import com.linecorp.bot.model.event.message.TextMessageContent;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
 
