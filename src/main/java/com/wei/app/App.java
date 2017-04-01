@@ -18,7 +18,6 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 
 public class App 
 {
-
 	public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }
