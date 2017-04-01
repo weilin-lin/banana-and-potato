@@ -23,24 +23,25 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 public class App 
 {
 	public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
-    }
+    SpringApplication.run(App.class, args);
+}
 
-  @Autowired
-  private LineMessagingService lineMessagingService;
+//----- ここから -----
+@Autowired
+private LineMessagingService lineMessagingService;
 
-  @EventMapping
-  public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
-    System.out.println("event: " + event);
-    final BotApiResponse apiResponse = lineMessagingService
-        .replyMessage(new ReplyMessage(event.getReplyToken(),
-                                       (Message) Collections.singletonList(new TextMessage(event.getSource().getUserId()))))
-        .execute().body();
-    System.out.println("Sent a message: " + apiResponse);
-  }
+@EventMapping
+public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
+System.out.println("event: " + event);
+final BotApiResponse apiResponse = lineMessagingService
+    .replyMessage(new ReplyMessage(event.getReplyToken(),
+                                   Collections.singletonList(new TextMessage(event.getSource().getUserId()))))
+    .execute().body();
+System.out.println("Sent a message: " + apiResponse);
+}
 
-  @EventMapping
-  public void defaultMessageEvent(Event event) {
-    System.out.println("event: " + event);
-  }
+@EventMapping
+public void defaultMessageEvent(Event event) {
+System.out.println("event: " + event);
+}
 }
