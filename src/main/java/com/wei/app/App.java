@@ -83,7 +83,7 @@ public class App {
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text.toLowerCase()) {
-		case "nini": {
+		case "charge": {
 			String watson_response = conversation("hi");
 			/*String userId = event.getSource().getUserId();
 			if (userId != null) {
@@ -98,13 +98,13 @@ public class App {
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
 			}*/
-			//this.replyText(replyToken, "\\^O^/");
+			this.replyText(replyToken, "\\^Q^/");
 			//System.out.println("\\^O^/");
-			this.replyText(replyToken, watson_response);
+			//this.replyText(replyToken, watson_response);
 			break;
 		}
-		case "bye": {
-			Source source = event.getSource();
+		case "cutie": {
+			/*Source source = event.getSource();
 			if (source instanceof GroupSource) {
 				this.replyText(replyToken, "Leaving group");
 				lineMessagingService.leaveGroup(((GroupSource) source).getGroupId()).execute();
@@ -113,17 +113,19 @@ public class App {
 				lineMessagingService.leaveRoom(((RoomSource) source).getRoomId()).execute();
 			} else {
 				this.replyText(replyToken, "Bot can't leave from 1:1 chat");
-			}
+			}*/
+			this.replyText(replyToken, "\\^3^/");
 			break;
 		}
-		case "confirm": {
-			ConfirmTemplate confirmTemplate = new ConfirmTemplate("Do it?", new MessageAction("Yes", "Yes!"),
+		case "mazi": {
+			/*ConfirmTemplate confirmTemplate = new ConfirmTemplate("Do it?", new MessageAction("Yes", "Yes!"),
 					new MessageAction("No", "No!"));
 			TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
-			this.reply(replyToken, templateMessage);
+			this.reply(replyToken, templateMessage);*/
+			this.replyText(replyToken, "mazi mazi mazi nini ng, mazi nini doesn't know how to go home~ ");
 			break;
 		}
-		case "buttons": {
+	/*	case "buttons": {
 			String imageUrl = createUri("/static/buttons/1040.jpg");
 			ButtonsTemplate buttonsTemplate = new ButtonsTemplate(imageUrl, "My button sample", "Hello, my button",
 					Arrays.asList(new URIAction("Go to line.me", "https://line.me"),
@@ -158,13 +160,15 @@ public class App {
 									new URIImagemapAction("https://store.line.me/family/play/en",
 											new ImagemapArea(0, 520, 520, 520)),
 									new MessageImagemapAction("URANAI!", new ImagemapArea(520, 520, 520, 520)))));
-			break;
+			break;*/
 		default:
-			log.info("Returns echo message {}: {}", replyToken, text);
+			/*log.info("Returns echo message {}: {}", replyToken, text);
 			this.replyText(replyToken, text);
 
-			this.pushText(event.getSource().getUserId(), "台南張先生已經對您的物件送出個人履歷");
-
+			this.pushText(event.getSource().getUserId(), "台南張先生已經對您的物件送出個人履歷");*/
+			String watson_response = conversation(text);
+			this.replyText(replyToken, watson_response);
+			
 			break;
 		}
 	}
