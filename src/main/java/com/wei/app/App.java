@@ -84,7 +84,7 @@ public class App {
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text) {
 		case "Nini": {
-			this.conversation("hi");
+			String answer = this.conversation("hi");
 			/*String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
@@ -98,7 +98,7 @@ public class App {
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
 			}*/
-			this.replyText(replyToken, "\\^O^/");
+			this.replyText(replyToken, "\\^O^/"+answer);
 			break;
 		}
 		case "bye": {
@@ -231,7 +231,7 @@ public class App {
 		System.out.println("event: " + event);
 	}
 	
-	public void conversation(String textToWatson) {
+	public String conversation(String textToWatson) {
 		
 		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_07_11);
 		service.setUsernameAndPassword("41e6bfc4-912f-4ce4-bc49-ddeb421ed65a","dJ2r5NHnTTS7");
@@ -239,5 +239,6 @@ public class App {
 		MessageRequest newMessage = new MessageRequest.Builder().inputText(textToWatson).build();
 		MessageResponse response = service.message("58351ed8-a0f5-4746-8dcf-0d49e1a71bdf", newMessage).execute();
 		System.out.println(response);
+		return response.toString();
 	}
 }
