@@ -98,7 +98,8 @@ public class App {
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
 			}*/
-			this.replyText(replyToken, "\\^O^/"+answer);
+			this.replyText(replyToken, "\\^O^/");
+			this.replyText(replyToken, answer);
 			break;
 		}
 		case "bye": {
