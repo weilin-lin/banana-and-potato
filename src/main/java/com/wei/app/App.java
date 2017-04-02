@@ -241,6 +241,8 @@ public class App {
 		MessageRequest newMessage = new MessageRequest.Builder().inputText(text).build();
 		MessageResponse response = service.message("58351ed8-a0f5-4746-8dcf-0d49e1a71bdf", newMessage).execute();
 		//System.out.println(response);
-		return response.getText().toString();
+		String response_text = response.getText().toString();
+		response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
+		return response_text;
 	}
 }
