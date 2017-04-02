@@ -84,7 +84,7 @@ public class App {
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text) {
 		case "Nini": {
-			this.conversation("hi");
+			//this.conversation("hi");
 			/*String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
@@ -99,7 +99,7 @@ public class App {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
 			}*/
 			this.replyText(replyToken, "\\^O^/");
-			System.out.println("\\^O^/");
+			//System.out.println("\\^O^/");
 			//this.replyText(replyToken, answer);
 			break;
 		}
