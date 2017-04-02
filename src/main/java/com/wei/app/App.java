@@ -79,7 +79,7 @@ public class App {
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text) {
-		case "profile": {
+		case "Profile": {
 			String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
