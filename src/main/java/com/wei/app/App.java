@@ -79,7 +79,7 @@ public class App {
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text) {
-		case "Profile": {
+		case "Nini": {
 			String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
@@ -93,6 +93,7 @@ public class App {
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
 			}
+			this.replyText(replyToken, "\\^O^/");
 			break;
 		}
 		case "bye": {
