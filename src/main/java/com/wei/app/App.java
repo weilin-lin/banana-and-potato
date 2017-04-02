@@ -81,7 +81,7 @@ public class App {
 		switch (text) {
 		case "Nini": {
 			String userId = event.getSource().getUserId();
-			if (userId != null) {
+			/*if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
 				if (response.isSuccessful()) {
 					UserProfileResponse profiles = response.body();
@@ -92,7 +92,7 @@ public class App {
 				}
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
-			}
+			}*/
 			this.replyText(replyToken, "\\^O^/");
 			break;
 		}
