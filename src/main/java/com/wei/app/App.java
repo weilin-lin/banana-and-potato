@@ -84,7 +84,7 @@ public class App {
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text) {
 		case "Nini": {
-			String watson_response = this.conversation("hi");
+			String watson_response = conversation("hi");
 			/*String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
@@ -233,7 +233,7 @@ public class App {
 		System.out.println("event: " + event);
 	}
 	
-	public String conversation(String text) {
+	private String conversation(String text) {
 		
 		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_07_11);
 		service.setUsernameAndPassword("41e6bfc4-912f-4ce4-bc49-ddeb421ed65a","dJ2r5NHnTTS7");
