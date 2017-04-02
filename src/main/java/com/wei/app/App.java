@@ -11,6 +11,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
+import com.ibm.watson.developer_cloud.conversation.v1.model.MessageRequest;
+import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
+
 import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
@@ -80,8 +84,9 @@ public class App {
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text) {
 		case "Nini": {
-			String userId = event.getSource().getUserId();
-			/*if (userId != null) {
+			this.conversation("hi");
+			/*String userId = event.getSource().getUserId();
+			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
 				if (response.isSuccessful()) {
 					UserProfileResponse profiles = response.body();
@@ -224,5 +229,15 @@ public class App {
 	@EventMapping
 	public void defaultMessageEvent(Event event) {
 		System.out.println("event: " + event);
+	}
+	
+	public void conversation(String textToWatson) {
+		
+		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_07_11);
+		service.setUsernameAndPassword("41e6bfc4-912f-4ce4-bc49-ddeb421ed65a","dJ2r5NHnTTS7");
+
+		MessageRequest newMessage = new MessageRequest.Builder().inputText(textToWatson).build();
+		MessageResponse response = service.message("58351ed8-a0f5-4746-8dcf-0d49e1a71bdf", newMessage).execute();
+		System.out.println(response);
 	}
 }
