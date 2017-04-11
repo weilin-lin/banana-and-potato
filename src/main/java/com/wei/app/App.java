@@ -5,12 +5,15 @@ import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonObject;
 import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageRequest;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
@@ -64,6 +67,7 @@ public class App {
 	// ----- ここから -----
 	@Autowired
 	private LineMessagingService lineMessagingService;
+	public Map<String, Object> context_store = null;
 
 	@EventMapping
 	public void handleTextMessageEvent(MessageEvent<TextMessageContent> event) throws Exception {
@@ -245,11 +249,12 @@ public class App {
 		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_07_11);
 		service.setUsernameAndPassword("42815d8f-725f-444e-8349-c5e342c134c3","oItvdC6Dt4td");
 
-		MessageRequest newMessage = new MessageRequest.Builder().inputText(text).build();
+		MessageRequest newMessage = new MessageRequest.Builder().inputText(text).context(context_store).build();
 		MessageResponse response = service.message("f5b981bd-204a-4253-b3d8-371a1cb941c4", newMessage).execute();
 		//System.out.println(response);
 		String response_text = response.getText().toString();
-		log.info("Watson: {}", response_text);
+		context_store = response.getContext();
+		log.info("Watson says: {}", response_text);
 		response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
 		return response_text;
 	}
