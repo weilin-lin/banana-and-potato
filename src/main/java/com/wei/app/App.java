@@ -83,8 +83,8 @@ public class App {
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text.toLowerCase()) {
-		case "hi": {
-			String userId = event.getSource().getUserId();
+		case "aaaaaa": {
+			/*String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
 				if (response.isSuccessful()) {
@@ -96,7 +96,7 @@ public class App {
 				}
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
-			}
+			}*/
 			this.replyText(replyToken, "\\^Q^/");
 			//System.out.println("\\^O^/");
 			//this.replyText(replyToken, watson_response);
