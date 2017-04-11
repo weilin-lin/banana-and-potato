@@ -249,6 +249,7 @@ public class App {
 		MessageResponse response = service.message("f5b981bd-204a-4253-b3d8-371a1cb941c4", newMessage).execute();
 		//System.out.println(response);
 		String response_text = response.getText().toString();
+		log.info("Watson: {}", response_text);
 		response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
 		return response_text;
 	}
