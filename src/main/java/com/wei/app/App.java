@@ -82,9 +82,15 @@ public class App {
 		String text = content.getText();
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
-		switch (text.toLowerCase()) {
+		
+		String watson_response = conversation(text);
+		this.replyText(replyToken, watson_response);
+		
+		log.info("Returns echo message {}: {}", replyToken, watson_response);
+		
+		/*switch (text.toLowerCase()) {
 		case "aaaaaa": {
-			/*String userId = event.getSource().getUserId();
+			String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
 				if (response.isSuccessful()) {
@@ -96,7 +102,7 @@ public class App {
 				}
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
-			}*/
+			}
 			this.replyText(replyToken, "\\^Q^/");
 			//System.out.println("\\^O^/");
 			//this.replyText(replyToken, watson_response);
@@ -157,17 +163,17 @@ public class App {
 									new URIImagemapAction("https://store.line.me/family/play/en",
 											new ImagemapArea(0, 520, 520, 520)),
 									new MessageImagemapAction("URANAI!", new ImagemapArea(520, 520, 520, 520)))));
-			break;*/
+			break;
 		default:
 			/*log.info("Returns echo message {}: {}", replyToken, text);
 			this.replyText(replyToken, text);
 
-			this.pushText(event.getSource().getUserId(), "台南張先生已經對您的物件送出個人履歷");*/
+			this.pushText(event.getSource().getUserId(), "台南張先生已經對您的物件送出個人履歷");
 			String watson_response = conversation(text);
 			this.replyText(replyToken, watson_response);
 			
 			break;
-		}
+		}*/
 	}
 
 	private void replyText(@NonNull String replyToken, @NonNull String message) {
