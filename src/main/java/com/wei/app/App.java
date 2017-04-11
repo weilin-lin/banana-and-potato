@@ -83,9 +83,8 @@ public class App {
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 		switch (text.toLowerCase()) {
-		case "charge": {
-			String watson_response = conversation("hi");
-			/*String userId = event.getSource().getUserId();
+		case "hi": {
+			String userId = event.getSource().getUserId();
 			if (userId != null) {
 				Response<UserProfileResponse> response = lineMessagingService.getProfile(userId).execute();
 				if (response.isSuccessful()) {
@@ -97,14 +96,14 @@ public class App {
 				}
 			} else {
 				this.replyText(replyToken, "Bot can't use profile API without user ID");
-			}*/
+			}
 			this.replyText(replyToken, "\\^Q^/");
 			//System.out.println("\\^O^/");
 			//this.replyText(replyToken, watson_response);
 			break;
 		}
-		case "cutie": {
-			/*Source source = event.getSource();
+		/*case "bye": {
+			Source source = event.getSource();
 			if (source instanceof GroupSource) {
 				this.replyText(replyToken, "Leaving group");
 				lineMessagingService.leaveGroup(((GroupSource) source).getGroupId()).execute();
@@ -113,19 +112,17 @@ public class App {
 				lineMessagingService.leaveRoom(((RoomSource) source).getRoomId()).execute();
 			} else {
 				this.replyText(replyToken, "Bot can't leave from 1:1 chat");
-			}*/
-			this.replyText(replyToken, "\\^3^/");
+			}
 			break;
 		}
-		case "mazi": {
-			/*ConfirmTemplate confirmTemplate = new ConfirmTemplate("Do it?", new MessageAction("Yes", "Yes!"),
+		case "confirm": {
+			ConfirmTemplate confirmTemplate = new ConfirmTemplate("Do it?", new MessageAction("Yes", "Yes!"),
 					new MessageAction("No", "No!"));
 			TemplateMessage templateMessage = new TemplateMessage("Confirm alt text", confirmTemplate);
-			this.reply(replyToken, templateMessage);*/
-			this.replyText(replyToken, "mazi mazi mazi nini ng, mazi nini doesn't know how to go home~ ");
+			this.reply(replyToken, templateMessage);
 			break;
 		}
-	/*	case "buttons": {
+		case "buttons": {
 			String imageUrl = createUri("/static/buttons/1040.jpg");
 			ButtonsTemplate buttonsTemplate = new ButtonsTemplate(imageUrl, "My button sample", "Hello, my button",
 					Arrays.asList(new URIAction("Go to line.me", "https://line.me"),
@@ -240,10 +237,10 @@ public class App {
 	private String conversation(String text) {
 		
 		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_07_11);
-		service.setUsernameAndPassword("41e6bfc4-912f-4ce4-bc49-ddeb421ed65a","dJ2r5NHnTTS7");
+		service.setUsernameAndPassword("42815d8f-725f-444e-8349-c5e342c134c3","oItvdC6Dt4td");
 
 		MessageRequest newMessage = new MessageRequest.Builder().inputText(text).build();
-		MessageResponse response = service.message("58351ed8-a0f5-4746-8dcf-0d49e1a71bdf", newMessage).execute();
+		MessageResponse response = service.message("b3334384-ec1f-468c-8bab-e2e4dd4544e4", newMessage).execute();
 		//System.out.println(response);
 		String response_text = response.getText().toString();
 		response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
