@@ -262,8 +262,10 @@ public class App {
 			if (inputText.toLowerCase().equals("yes")) {
 				String dateToGora = formatToString(response.getContext().get("date"));
 				String placeToGora = formatToString(response.getContext().get("place"));
+				String categoryToGora = formatToString(response.getContext().get("category"));
 				log.info("Date: {}", dateToGora);
 				log.info("Place: {}", placeToGora);
+				log.info("Place: {}", categoryToGora);
 				//responseFromGora = sendToGoraApi(dateToGora, placeToGora);
 				sendToGoraApi(dateToGora, placeToGora);
 			}
