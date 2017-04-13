@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
@@ -308,8 +309,10 @@ public class App {
 		        JsonParser parser = new JsonParser();
 		        JsonObject json = (JsonObject) parser.parse(content);
 		        JsonArray itemList = (JsonArray) json.get("Items");
-		        itemList.get(1).getAsJsonObject().get("golfCourseDetailUrl");
-		        log.info("Response From Gora: {}",  itemList.get(1).getAsJsonObject().get("golfCourseDetailUrl"));
+		        JsonObject jObj = (JsonObject) itemList.getAsJsonObject().get("golfCourseDetailUrl");
+		        
+		        
+		        log.info("Response From Gora: {}", jObj);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
