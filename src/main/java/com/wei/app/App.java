@@ -10,16 +10,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageRequest;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
@@ -306,14 +304,10 @@ public class App {
 			if (respEntity != null) {
 		        // EntityUtils to get the response content
 		        String content =  EntityUtils.toString(respEntity);
-		        JsonParser parser = new JsonParser();
-		        JsonObject json = (JsonObject) parser.parse(content);
-		        JsonArray itemList = (JsonArray) json.get("Items");
-		        JsonObject jObj = itemList.getAsJsonObject();
-		        String abc = jObj.get("golfCourseDetailUrl").toString();
+		       
 		        
 		        
-		        log.info("Response From Gora: {}", abc);
+		        log.info("Response From Gora: {}", content);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
