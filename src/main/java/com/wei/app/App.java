@@ -235,7 +235,7 @@ public class App {
 		if (nodesVisitedText.equals("item_search_request_confirmed_")||nodesVisitedText.equals("item_search_request_confirmed")) {
 			if (inputText.toLowerCase().equals("yes")) {
 				String itemToIchiba = formatToString(response.getContext().get("item"));
-				String genderToIchiba = formatToString(response.getContext().get("item"));
+				String genderToIchiba = formatToString(response.getContext().get("gender"));
 				log.info("Item: {}", itemToIchiba);
 				log.info("Gender: {}", genderToIchiba);
 			}
