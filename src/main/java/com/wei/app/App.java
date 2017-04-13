@@ -300,6 +300,7 @@ public class App {
 		params.add(new BasicNameValuePair("place", place));
 		params.add(new BasicNameValuePair("date", date));
 		params.add(new BasicNameValuePair("app_id", "1020713603162489107"));
+		params.add(new BasicNameValuePair("app_secret", "f1108f28471d96599c24b2d9e636e17be716dd05"));
 		try {
 		    httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
