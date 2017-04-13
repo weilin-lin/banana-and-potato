@@ -16,7 +16,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageRequest;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
@@ -303,7 +305,9 @@ public class App {
 			if (respEntity != null) {
 		        // EntityUtils to get the response content
 		        String content =  EntityUtils.toString(respEntity);
-		        log.info("Response From Gora: {}", content);
+		        JsonParser parser = new JsonParser();
+		        JsonObject json = (JsonObject) parser.parse(content);
+		        log.info("Response From Gora: {}", json);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
