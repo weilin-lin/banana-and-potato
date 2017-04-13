@@ -61,8 +61,10 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -285,7 +287,47 @@ public class App {
 	}
 	
 	private void sendToGoraApi(String date, String place){
-		Object a = null;
+		
+		/*
+		 * Create the POST request
+		 */
+		HttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("https://akshay-api.herokuapp.com/gora/golfcourse");
+		// Request parameters and other properties.
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		//params.add(new BasicNameValuePair("user", "Bob"));
+		params.add(new BasicNameValuePair("place", place));
+		params.add(new BasicNameValuePair("date", date));
+		params.add(new BasicNameValuePair("app_id", "1020713603162489107"));
+		try {
+		    httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+		    // writing error to Log
+		    e.printStackTrace();
+		}
+		/*
+		 * Execute the HTTP Request
+		 */
+		try {
+		    HttpResponse httpResponse = httpclient.execute(httppost);
+		    HttpEntity respEntity = httpResponse.getEntity();
+
+		    if (respEntity != null) {
+		        // EntityUtils to get the response content
+		        String content =  EntityUtils.toString(respEntity);
+		        log.info("Response From Gora: {}", content);
+		    }
+		    
+		    
+		} catch (ClientProtocolException e) {
+		    // writing exception to log
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // writing exception to log
+		    e.printStackTrace();
+		}
+		
+		/*Object a = null;
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost("https://akshay-api.herokuapp.com/gora/golfcourse");
 
@@ -293,8 +335,7 @@ public class App {
 		List<NameValuePair> params = new ArrayList<NameValuePair>(2);
 		params.add(new BasicNameValuePair("place", place));
 		params.add(new BasicNameValuePair("date", date));
-		params.add(new BasicNameValuePair("app_id", "sd"));
-		params.add(new BasicNameValuePair("app_secret", "akshay"));
+		params.add(new BasicNameValuePair("app_id", "1020713603162489107"));
 		try {
 			httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -338,7 +379,7 @@ public class App {
 					e.printStackTrace();
 				}
 		    }
-		}
+		}*/
 		
 		//return instream;
 		
