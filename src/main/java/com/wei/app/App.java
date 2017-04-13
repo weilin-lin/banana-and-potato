@@ -251,7 +251,8 @@ public class App {
 
 		MessageRequest newMessage = new MessageRequest.Builder().inputText(text).context(context_store).build();
 		MessageResponse response = service.message("b3334384-ec1f-468c-8bab-e2e4dd4544e4", newMessage).execute();
-		System.out.println(response);
+		log.info("Watson's response: {}", response);
+		//System.out.println(response);
 		
 		//response.getOutput().get("nodes_visited");
 		
