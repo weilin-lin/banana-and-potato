@@ -254,7 +254,7 @@ public class App {
 		log.info("Watson's response: {}", response);
 		//System.out.println(response);
 		
-		//response.getOutput().get("nodes_visited");
+		log.info("Watson's output: {}", response.getOutput().get("nodes_visited"));
 		
 		String response_text = response.getText().toString();
 		context_store = response.getContext();
