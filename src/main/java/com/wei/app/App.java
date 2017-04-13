@@ -232,11 +232,12 @@ public class App {
 		log.info("Watson's output: {}", response.getOutput().get("nodes_visited"));
 		String nodesVisitedText = formatToString(response.getOutput().get("nodes_visited"));
 		String inputText = formatToString(response.getInputText());
-		if (nodesVisitedText.equals("item_search_request_confirmed_")) {
+		if (nodesVisitedText.equals("item_search_request_confirmed_")||nodesVisitedText.equals("item_search_request_confirmed")) {
 			if (inputText.toLowerCase().equals("yes")) {
-				String itemIchiba = formatToString(response.getContext().get("item"));
-				log.info("Item: {}", response.getContext().get("item"));
-				log.info("Item: {}", itemIchiba);
+				String itemToIchiba = formatToString(response.getContext().get("item"));
+				String genderToIchiba = formatToString(response.getContext().get("item"));
+				log.info("Item: {}", itemToIchiba);
+				log.info("Gender: {}", genderToIchiba);
 			}
 		}
 
