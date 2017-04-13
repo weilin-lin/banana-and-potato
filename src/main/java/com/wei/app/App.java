@@ -255,8 +255,8 @@ public class App {
 		//System.out.println(response);
 		
 		log.info("Watson's output: {}", response.getOutput().get("nodes_visited"));
-		if (response.getOutput().get("nodes_visited").equals("item_search_request_confirmed_")){
-			log.info("YEAH: {}", "YEAH");
+		if (response.getOutput().get("nodes_visited").toString().replaceAll("[\\p{Ps}\\p{Pe}]", "").equals("item_search_request_confirmed_")){
+			log.info("YEAH: {}", response.getOutput().get("nodes_visited"));
 		}
 		
 		String response_text = response.getText().toString();
