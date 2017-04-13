@@ -262,10 +262,10 @@ public class App {
 			if (inputText.toLowerCase().equals("yes")) {
 				String dateToGora = formatToString(response.getContext().get("date"));
 				String placeToGora = formatToString(response.getContext().get("place"));
-				String categoryToGora = formatToString(response.getContext().get("category"));
+				//String categoryToGora = formatToString(response.getContext().get("category"));
 				log.info("Date: {}", dateToGora);
 				log.info("Place: {}", placeToGora);
-				log.info("Place: {}", categoryToGora);
+				//log.info("Place: {}", categoryToGora);
 				//responseFromGora = sendToGoraApi(dateToGora, placeToGora);
 				sendToGoraApi(dateToGora, placeToGora);
 			}
@@ -293,6 +293,8 @@ public class App {
 		List<NameValuePair> params = new ArrayList<NameValuePair>(2);
 		params.add(new BasicNameValuePair("place", place));
 		params.add(new BasicNameValuePair("date", date));
+		params.add(new BasicNameValuePair("app_id", "sd"));
+		params.add(new BasicNameValuePair("app_secret", "akshay"));
 		try {
 			httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
