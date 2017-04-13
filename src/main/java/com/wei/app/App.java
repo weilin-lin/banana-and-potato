@@ -60,8 +60,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -288,10 +290,28 @@ public class App {
 	
 	private void sendToGoraApi(String date, String place){
 		
+		String url = "https://app.rakuten.co.jp/services/api/Gora/GoraGolfCourseSearch/20131113?format=json&hits=5&sort=evaluation&areaCode=1&applicationId=1020713603162489107";
+
+		HttpClient client = HttpClientBuilder.create().build();
+		HttpGet request = new HttpGet(url);
+
+		// add request header
+		request.addHeader("Content-Type", "application/json");
+		try {
+			HttpResponse httpResponse = client.execute(request);
+			log.info("Response From Gora: {}", httpResponse);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		/*
 		 * Create the POST request
 		 */
-		HttpClient httpclient = HttpClients.createDefault();
+		/*HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost("https://akshay-api.herokuapp.com/gora/golfcourse");
 		httppost.setHeader("Content-Type", "application/json");
 		// Request parameters and other properties.
@@ -306,11 +326,11 @@ public class App {
 		} catch (UnsupportedEncodingException e) {
 		    // writing error to Log
 		    e.printStackTrace();
-		}
+		}*/
 		/*
 		 * Execute the HTTP Request
 		 */
-		try {
+		/*try {
 		    HttpResponse httpResponse = httpclient.execute(httppost);
 		    HttpEntity respEntity = httpResponse.getEntity();
 
@@ -327,7 +347,9 @@ public class App {
 		} catch (IOException e) {
 		    // writing exception to log
 		    e.printStackTrace();
-		}
+		}*/
+		
+		//-------------------
 		
 		/*Object a = null;
 		HttpClient httpclient = HttpClients.createDefault();
