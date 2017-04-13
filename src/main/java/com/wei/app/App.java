@@ -264,11 +264,12 @@ public class App {
 				String placeToGora = formatToString(response.getContext().get("place"));
 				log.info("Date: {}", dateToGora);
 				log.info("Place: {}", placeToGora);
-				responseFromGora = sendToGoraApi(dateToGora, placeToGora);
+				//responseFromGora = sendToGoraApi(dateToGora, placeToGora);
+				sendToGoraApi(dateToGora, placeToGora);
 			}
 		}
 		
-		log.info("Response From Gora: {}", responseFromGora);
+		//log.info("Response From Gora: {}", responseFromGora);
 		
 		
 		
@@ -281,7 +282,7 @@ public class App {
 		return response_text;
 	}
 	
-	private Object sendToGoraApi(String date, String place){
+	private void sendToGoraApi(String date, String place){
 		Object a = null;
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost("https://akshay-api.herokuapp.com/gora/golfcourse");
@@ -324,6 +325,7 @@ public class App {
 			}
 		    try {
 		        // do something useful
+		    	log.info("Response From Gora: {}", instream);
 		    } finally {
 		        try {
 					instream.close();
@@ -334,7 +336,7 @@ public class App {
 		    }
 		}
 		
-		return instream;
+		//return instream;
 		
 	}
 
