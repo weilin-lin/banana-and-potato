@@ -259,11 +259,17 @@ public class App {
 			log.info("YEAH: {}", response.getOutput().get("nodes_visited"));
 		}
 		
-		String response_text = response.getText().toString();
+		String response_text = this.formatToString(response.getText());
 		context_store = response.getContext();
 		log.info("Watson says: {}", response_text);
-		response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
+		//response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
 		return response_text;
+	}
+	
+	private String formatToString(Object ob){
+		String formatResult = null;
+		formatResult = ob.toString().replaceAll("[\\p{Ps}\\p{Pe}]", "");
+		return formatResult;
 	}
 	
 }
