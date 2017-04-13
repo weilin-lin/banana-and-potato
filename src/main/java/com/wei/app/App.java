@@ -255,7 +255,7 @@ public class App {
 		//System.out.println(response);
 		
 		log.info("Watson's output: {}", response.getOutput().get("nodes_visited"));
-		if (response.getOutput().get("nodes_visited").equals("item_search_request_confirmed_")){
+		if (response.getOutput().get("nodes_visited").equals("[item_search_request_confirmed_]")){
 			log.info("YEAH: {}", "YEAH");
 		}
 		
