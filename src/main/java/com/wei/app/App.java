@@ -293,6 +293,7 @@ public class App {
 		 */
 		HttpClient httpclient = HttpClients.createDefault();
 		HttpPost httppost = new HttpPost("https://akshay-api.herokuapp.com/gora/golfcourse");
+		httppost.setHeader("Content-Type", "application/json");
 		// Request parameters and other properties.
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		//params.add(new BasicNameValuePair("user", "Bob"));
