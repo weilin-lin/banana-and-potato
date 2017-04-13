@@ -308,7 +308,8 @@ public class App {
 		        JsonParser parser = new JsonParser();
 		        JsonObject json = (JsonObject) parser.parse(content);
 		        JsonArray itemList = (JsonArray) json.get("Items");
-		        log.info("Response From Gora: {}", itemList);
+		        itemList.get(1).toString();
+		        log.info("Response From Gora: {}", itemList.get(1).toString());
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
