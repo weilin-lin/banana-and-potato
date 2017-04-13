@@ -309,10 +309,11 @@ public class App {
 		        JsonParser parser = new JsonParser();
 		        JsonObject json = (JsonObject) parser.parse(content);
 		        JsonArray itemList = (JsonArray) json.get("Items");
-		        JsonObject jObj = (JsonObject) itemList.getAsJsonObject().get("golfCourseDetailUrl");
+		        JsonObject jObj = itemList.getAsJsonObject();
+		        String abc = jObj.get("golfCourseDetailUrl").toString();
 		        
 		        
-		        log.info("Response From Gora: {}", jObj);
+		        log.info("Response From Gora: {}", abc);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
