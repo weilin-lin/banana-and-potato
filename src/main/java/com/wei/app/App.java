@@ -244,6 +244,13 @@ public class App {
 				String itemToIchiba = formatToString(response.getContext().get("item"));
 				log.info("Item: {}", itemToIchiba);
 			}
+		}else if (nodesVisitedText.equals("golf_search_request_confirmed")){
+			if (inputText.toLowerCase().equals("yes")) {
+				String dateToGora = formatToString(response.getContext().get("date"));
+				String placeToGora = formatToString(response.getContext().get("place"));
+				log.info("Date: {}", dateToGora);
+				log.info("Place: {}", placeToGora);
+			}
 		}
 
 		String response_text = this.formatToString(response.getText());
