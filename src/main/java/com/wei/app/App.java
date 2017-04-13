@@ -309,9 +309,10 @@ public class App {
 			e.printStackTrace();
 		}
 		HttpEntity entity = httpResponse.getEntity();
-
+		InputStream instream = null;
+		
 		if (entity != null) {
-		    InputStream instream = null;
+		   
 			try {
 				instream = entity.getContent();
 			} catch (UnsupportedOperationException e) {
@@ -333,7 +334,8 @@ public class App {
 		    }
 		}
 		
-		return a;
+		return instream;
+		
 	}
 
 	private String formatToString(Object ob) {
