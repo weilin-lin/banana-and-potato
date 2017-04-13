@@ -1,7 +1,10 @@
 package com.wei.app;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -50,6 +53,16 @@ import com.linecorp.bot.model.event.message.TextMessageContent;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import retrofit2.Response;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -232,6 +245,7 @@ public class App {
 		log.info("Watson's output: {}", response.getOutput().get("nodes_visited"));
 		String nodesVisitedText = formatToString(response.getOutput().get("nodes_visited"));
 		String inputText = formatToString(response.getInputText());
+		Object responseFromGora = null;
 		if (nodesVisitedText.equals("item_search_request_confirmed_")) {
 			if (inputText.toLowerCase().equals("yes")) {
 				String itemToIchiba = formatToString(response.getContext().get("item"));
@@ -250,14 +264,76 @@ public class App {
 				String placeToGora = formatToString(response.getContext().get("place"));
 				log.info("Date: {}", dateToGora);
 				log.info("Place: {}", placeToGora);
+				responseFromGora = sendToGoraApi(dateToGora, placeToGora);
 			}
 		}
+		
+		log.info("Response From Gora: {}", responseFromGora);
+		
+		
+		
+		
 
 		String response_text = this.formatToString(response.getText());
 		context_store = response.getContext();
 		log.info("Watson says: {}", response_text);
 		// response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
 		return response_text;
+	}
+	
+	private Object sendToGoraApi(String date, String place){
+		Object a = null;
+		HttpClient httpclient = HttpClients.createDefault();
+		HttpPost httppost = new HttpPost("https://akshay-api.herokuapp.com/gora/golfcourse");
+
+		// Request parameters and other properties.
+		List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+		params.add(new BasicNameValuePair("place", place));
+		params.add(new BasicNameValuePair("date", date));
+		try {
+			httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//Execute and get the response.
+		HttpResponse httpResponse = null;
+		try {
+			httpResponse = httpclient.execute(httppost);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		HttpEntity entity = httpResponse.getEntity();
+
+		if (entity != null) {
+		    InputStream instream = null;
+			try {
+				instream = entity.getContent();
+			} catch (UnsupportedOperationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    try {
+		        // do something useful
+		    } finally {
+		        try {
+					instream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		}
+		
+		return a;
 	}
 
 	private String formatToString(Object ob) {
