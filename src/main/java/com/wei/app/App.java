@@ -250,12 +250,16 @@ public class App {
 		service.setUsernameAndPassword("42815d8f-725f-444e-8349-c5e342c134c3","oItvdC6Dt4td");
 
 		MessageRequest newMessage = new MessageRequest.Builder().inputText(text).context(context_store).build();
-		MessageResponse response = service.message("f5b981bd-204a-4253-b3d8-371a1cb941c4", newMessage).execute();
-		//System.out.println(response);
+		MessageResponse response = service.message("b3334384-ec1f-468c-8bab-e2e4dd4544e4", newMessage).execute();
+		System.out.println(response);
+		
+		//response.getOutput().get("nodes_visited");
+		
 		String response_text = response.getText().toString();
 		context_store = response.getContext();
 		log.info("Watson says: {}", response_text);
 		response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
 		return response_text;
 	}
+	
 }
