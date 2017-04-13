@@ -234,7 +234,9 @@ public class App {
 		String inputText = formatToString(response.getInputText());
 		if (nodesVisitedText.equals("item_search_request_confirmed_")) {
 			if (inputText.toLowerCase().equals("yes")) {
-				log.info("YEAH: {}", response.getOutput().get("nodes_visited"));
+				String itemIchiba = formatToString(response.getContext().get("item"));
+				log.info("Item: {}", response.getContext().get("item"));
+				log.info("Item: {}", itemIchiba);
 			}
 		}
 
