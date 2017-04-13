@@ -299,7 +299,12 @@ public class App {
 		request.addHeader("Content-Type", "application/json");
 		try {
 			HttpResponse httpResponse = client.execute(request);
-			log.info("Response From Gora: {}", httpResponse);
+			HttpEntity respEntity = httpResponse.getEntity();
+			if (respEntity != null) {
+		        // EntityUtils to get the response content
+		        String content =  EntityUtils.toString(respEntity);
+		        log.info("Response From Gora: {}", content);
+		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
