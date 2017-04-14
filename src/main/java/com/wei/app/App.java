@@ -288,7 +288,7 @@ public class App {
 			// response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
 			return response_text;
 		}
-		return null;
+		return "nulll";
 		//log.info("Response From Gora: {}", responseFromGora);
 		
 		
