@@ -435,7 +435,7 @@ public class App {
 	private void handleCarouselContent(ArrayList<GObj> content, String replyToken){
 		 String imageUrl = createUri("/static/buttons/1040.jpg");
          ArrayList<CarouselColumn> cl = new ArrayList<>();
-         
+         log.info("CL-1: {}", cl);
          for(int i=0;i<content.size();i++){
         	 GObj go = content.get(i);
         	 
@@ -448,7 +448,7 @@ public class App {
         	
         	 cl.add(new CarouselColumn(go.picture, go.name, go.desc,al));
          }
-         
+         log.info("CL-2: {}", cl);
 		 CarouselTemplate carouselTemplate = new CarouselTemplate(cl);
          TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
          this.reply(replyToken, templateMessage);   
