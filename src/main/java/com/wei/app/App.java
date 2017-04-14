@@ -464,7 +464,7 @@ public class App {
 			gg.desc = jo.getString("desc");
 			gg.picture = jo.getString("picture");
 			gg.rating = String.valueOf(jo.get("rating"));
-			JSONArray pl = jo.getJSONArray("plans");
+			JSONArray pl = jo.getJSONArray("plan");
 			for (int j=0;j<pl.length();j++){
 				Gplan plan = new Gplan();
 				JSONObject jjj = pl.getJSONObject(j);
