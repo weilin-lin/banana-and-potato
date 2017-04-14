@@ -18,6 +18,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.ibm.watson.developer_cloud.conversation.v1.ConversationService;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageRequest;
 import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
@@ -25,6 +28,7 @@ import com.ibm.watson.developer_cloud.conversation.v1.model.MessageResponse;
 import com.linecorp.bot.client.LineMessagingService;
 import com.linecorp.bot.model.PushMessage;
 import com.linecorp.bot.model.ReplyMessage;
+import com.linecorp.bot.model.action.Action;
 import com.linecorp.bot.model.action.MessageAction;
 import com.linecorp.bot.model.action.PostbackAction;
 import com.linecorp.bot.model.action.URIAction;
@@ -68,6 +72,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -292,7 +298,7 @@ public class App {
 	
 	private void sendToGoraApi(String date, String place, String replyToken){
 		
-		String url = "https://app.rakuten.co.jp/services/api/Gora/GoraGolfCourseSearch/20131113?format=json&hits=5&sort=evaluation&areaCode=1&applicationId=1020713603162489107";
+		String url = "https://akshay-api.herokuapp.com/gora/golfplan?date="+date+"&place="+place;
 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet(url);
@@ -305,10 +311,11 @@ public class App {
 			if (respEntity != null) {
 		        // EntityUtils to get the response content
 		        String content =  EntityUtils.toString(respEntity);
-		      
-		        log.info("Response From Gora: {}", content);
+		        ArrayList<GObj> list = new ArrayList<>();
+		        list = convertIntoJson(content);
+		        log.info("Response From Gora String: {}", content);
 		        
-		        handleCarouselContent(content, replyToken);
+		        handleCarouselContent(list, replyToken);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -425,26 +432,50 @@ public class App {
 		return formatResult;
 	}
 	
-	private void handleCarouselContent(String content, String replyToken){
+	private void handleCarouselContent(ArrayList<GObj> content, String replyToken){
 		 String imageUrl = createUri("/static/buttons/1040.jpg");
-         CarouselTemplate carouselTemplate = new CarouselTemplate(
-                 Arrays.asList(
-                         new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                 new URIAction("Go to line.me",
-                                               "https://line.me"),
-                                 new PostbackAction("Say hello1",
-                                                    "hello こんにちは")
-                         )),
-                         new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
-                                 new PostbackAction("言 hello2",
-                                                    "hello こんにちは",
-                                                    "hello こんにちは"),
-                                 new MessageAction("Say message",
-                                                   "Rice=米")
-                         ))
-                 ));
+         ArrayList<CarouselColumn> cl = new ArrayList<>();
+         
+         for(int i=0;i<content.size();i++){
+        	 GObj go = content.get(i);
+        	 
+        	 List<Action> al = new ArrayList<>();
+        	 
+        	 for (int j=0;j<go.planslist.size();j++){
+        		 al.add(new URIAction(go.planslist.get(j).planName,
+                         go.planslist.get(j).url));
+        	 }
+        	
+        	 cl.add(new CarouselColumn(go.picture, go.name, go.desc,al));
+         }
+         
+		 CarouselTemplate carouselTemplate = new CarouselTemplate(cl);
          TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
          this.reply(replyToken, templateMessage);   
+	}
+	
+	private ArrayList<GObj> convertIntoJson(String content){
+		JSONArray jsonArray = new JSONArray(content);
+		ArrayList<GObj> listO = new ArrayList<>();
+		for (int i=0; i< jsonArray.length();i++){
+			GObj gg = new GObj();
+			JSONObject jo = jsonArray.getJSONObject(i);
+			gg.name = jo.getString("name");
+			gg.desc = jo.getString("desc");
+			gg.picture = jo.getString("picture");
+			gg.rating = jo.getString("rating");
+			JSONArray pl = jo.getJSONArray("plans");
+			for (int j=0;j<pl.length();j++){
+				Gplan plan = new Gplan();
+				JSONObject jjj = pl.getJSONObject(j);
+				plan.planName = jjj.getString("planName");
+				plan.url = jjj.getString("url");
+				plan.price = jjj.getString("price");
+			}
+			listO.add(gg);
+		}
+		return listO;
+		
 	}
 
 }
