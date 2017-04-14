@@ -281,19 +281,21 @@ public class App {
 				//responseFromGora = sendToGoraApi(dateToGora, placeToGora);
 				sendToGoraApi(dateToGora, placeToGora, replyToken);
 			}
+		}else{
+			String response_text = this.formatToString(response.getText());
+			context_store = response.getContext();
+			log.info("Watson says: {}", response_text);
+			// response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
+			return response_text;
 		}
-		
+		return null;
 		//log.info("Response From Gora: {}", responseFromGora);
 		
 		
 		
 		
 
-		String response_text = this.formatToString(response.getText());
-		context_store = response.getContext();
-		log.info("Watson says: {}", response_text);
-		// response_text = response_text.replaceAll("[\\p{Ps}\\p{Pe}]", "");
-		return response_text;
+		
 	}
 	
 	private void sendToGoraApi(String date, String place, String replyToken){
