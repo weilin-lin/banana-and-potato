@@ -104,11 +104,12 @@ public class App {
 
 		log.info("Got text message from {}: {}, userID = {}", replyToken, text, event.getSource().getUserId());
 
-		String watson_response = conversation(text);
+		String watson_response = conversation(text, replyToken);
 		this.replyText(replyToken, watson_response);
 
 		log.info("Returns echo message {}: {}", replyToken, watson_response);
 
+         
 		/*
 		 * switch (text.toLowerCase()) { case "aaaaaa": { String userId =
 		 * event.getSource().getUserId(); if (userId != null) {
@@ -237,7 +238,7 @@ public class App {
 		System.out.println("event: " + event);
 	}
 
-	private String conversation(String text) {
+	private String conversation(String text, String replyToken) {
 
 		ConversationService service = new ConversationService(ConversationService.VERSION_DATE_2016_07_11);
 		service.setUsernameAndPassword("42815d8f-725f-444e-8349-c5e342c134c3", "oItvdC6Dt4td");
@@ -272,7 +273,7 @@ public class App {
 				log.info("Place: {}", placeToGora);
 				//log.info("Place: {}", categoryToGora);
 				//responseFromGora = sendToGoraApi(dateToGora, placeToGora);
-				sendToGoraApi(dateToGora, placeToGora);
+				sendToGoraApi(dateToGora, placeToGora, replyToken);
 			}
 		}
 		
@@ -289,7 +290,7 @@ public class App {
 		return response_text;
 	}
 	
-	private void sendToGoraApi(String date, String place){
+	private void sendToGoraApi(String date, String place, String replyToken){
 		
 		String url = "https://app.rakuten.co.jp/services/api/Gora/GoraGolfCourseSearch/20131113?format=json&hits=5&sort=evaluation&areaCode=1&applicationId=1020713603162489107";
 
@@ -304,10 +305,10 @@ public class App {
 			if (respEntity != null) {
 		        // EntityUtils to get the response content
 		        String content =  EntityUtils.toString(respEntity);
-		       
-		        
-		        
+		      
 		        log.info("Response From Gora: {}", content);
+		        
+		        handleCarouselContent(content, replyToken);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -422,6 +423,28 @@ public class App {
 		String formatResult = null;
 		formatResult = ob.toString().replaceAll("[\\p{Ps}\\p{Pe}]", "");
 		return formatResult;
+	}
+	
+	private void handleCarouselContent(String content, String replyToken){
+		 String imageUrl = createUri("/static/buttons/1040.jpg");
+         CarouselTemplate carouselTemplate = new CarouselTemplate(
+                 Arrays.asList(
+                         new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                 new URIAction("Go to line.me",
+                                               "https://line.me"),
+                                 new PostbackAction("Say hello1",
+                                                    "hello こんにちは")
+                         )),
+                         new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                 new PostbackAction("言 hello2",
+                                                    "hello こんにちは",
+                                                    "hello こんにちは"),
+                                 new MessageAction("Say message",
+                                                   "Rice=米")
+                         ))
+                 ));
+         TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
+         this.reply(replyToken, templateMessage);   
 	}
 
 }
