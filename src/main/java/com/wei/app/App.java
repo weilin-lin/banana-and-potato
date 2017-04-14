@@ -463,14 +463,14 @@ public class App {
 			gg.name = jo.getString("name");
 			gg.desc = jo.getString("desc");
 			gg.picture = jo.getString("picture");
-			gg.rating = jo.getString("rating");
+			gg.rating = String.valueOf(jo.get("rating"));
 			JSONArray pl = jo.getJSONArray("plans");
 			for (int j=0;j<pl.length();j++){
 				Gplan plan = new Gplan();
 				JSONObject jjj = pl.getJSONObject(j);
 				plan.planName = jjj.getString("planName");
 				plan.url = jjj.getString("url");
-				plan.price = jjj.getString("price");
+				plan.price = String.valueOf(jjj.get("price"));
 			}
 			listO.add(gg);
 		}
