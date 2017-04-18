@@ -458,7 +458,7 @@ public class App {
 
          cl.add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
                                         new URIAction("Go to line.me",
-                                                      "https://line.me"),
+                                                      "http://line.me"),
                                         new PostbackAction("Say hello1",
                                                            "hello こんにちは")
                                 )));
