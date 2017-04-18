@@ -438,7 +438,7 @@ public class App {
 		 String imageUrl = createUri("/static/buttons/1040.jpg");
          ArrayList<CarouselColumn> cl = new ArrayList<>();
          log.info("CL-1: {}", cl);
-         for(int i=0;i<content.size();i++){
+         /*for(int i=0;i<content.size();i++){
         	 GObj go = content.get(i);
         	 
         	 List<Action> al = new ArrayList<>();
@@ -449,7 +449,7 @@ public class App {
         	 }
         	
         	 cl.add(new CarouselColumn(go.picture, go.name, go.desc,al));
-         }
+         }*/
 
          cl. add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
                                         new URIAction("Go to line.me",
