@@ -462,13 +462,13 @@ public class App {
                                         new PostbackAction("Say hello1",
                                                            "hello こんにちは")
                                 )));
-         
-         cl.add(new CarouselColumn("http://gora.golf.rakuten.co.jp/img/golf/200052/photo1.jpg", "中軽井沢カントリークラブ", "軽井沢", Arrays.asList(
+
+         /*cl.add(new CarouselColumn("http://gora.golf.rakuten.co.jp/img/golf/200052/photo1.jpg", "中軽井沢カントリークラブ", "軽井沢", Arrays.asList(
                                         new URIAction("Book",
                                                       "http://search.gora.golf.rakuten.co.jp/cal/disp/c_id/200052"),
                                         new PostbackAction("Reviews",
                                                            "http://booking.gora.golf.rakuten.co.jp/voice/detail/c_id/200052")
-                                )));
+                                )));*/
 
          
         
