@@ -314,10 +314,10 @@ public class App {
 		        // EntityUtils to get the response content
 		        String content =  EntityUtils.toString(respEntity);
 		        ArrayList<GObj> list = new ArrayList<>();
-		        list = convertIntoJson(content);
-		        log.info("Response From Gora String: {}", list);
+		        //list = convertIntoJson(content);
+		        //log.info("Response From Gora String: {}", list);
 		        
-		        handleCarouselContent(list, replyToken);
+		        handleCarouselContent(content, replyToken);
 		    }
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -434,8 +434,8 @@ public class App {
 		return formatResult;
 	}
 	
-	private void handleCarouselContent(ArrayList<GObj> content, String replyToken){
-		 String imageUrl = createUri("/static/buttons/1040.jpg");
+	private void handleCarouselContent(String content, String replyToken){
+		 //String imageUrl = createUri("/static/buttons/1040.jpg");
          ArrayList<CarouselColumn> cl = new ArrayList<>();
 
 
