@@ -456,7 +456,7 @@ public class App {
         	 cl.add(new CarouselColumn(go.picture, go.name, go.desc,al));
          }*/
 
-         cl.add(new CarouselColumn("http://gora.golf.rakuten.co.jp/img/golf/200052/photo1.jpg", "hoge", "fuga", Arrays.asList(
+         cl.add(new CarouselColumn("https://gora.golf.rakuten.co.jp/img/golf/200052/photo1.jpg", "hoge", "fuga", Arrays.asList(
                                         new URIAction("Go to line.me",
                                                       "http://line.me"),
                                         new PostbackAction("Say hello1",
