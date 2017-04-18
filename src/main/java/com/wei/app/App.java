@@ -440,7 +440,7 @@ public class App {
 
 
          log.info("CL-1: {}", cl);
-         GObj go = content.get(0);
+         //GObj go = content.get(0);
 
 
          /*for(int i=0;i<content.size();i++){
