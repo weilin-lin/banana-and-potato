@@ -456,25 +456,22 @@ public class App {
         	 cl.add(new CarouselColumn(go.picture, go.name, go.desc,al));
          }*/
 
-         cl. add(new CarouselColumn(imageUrl, "中軽井沢カントリークラブ", "軽井沢の自然に溶け合い、調和しながらも風格が漂うたたずまい｡", Arrays.asList(
-                                        new URIAction("Book",
-                                                      "http://search.gora.golf.rakuten.co.jp/cal/disp/c_id/200052"),
-                                        new PostbackAction("Reviews",
-                                                           "http://booking.gora.golf.rakuten.co.jp/voice/detail/c_id/200052")
-                                )));
-
-         cl. add(new CarouselColumn("http://gora.golf.rakuten.co.jp/img/golf/200052/photo1.jpg", "中軽井沢カントリークラブ", "軽井沢の自然に溶け合い、調和しながらも風格が漂うたたずまい｡", Arrays.asList(
-                                        new URIAction("Book",
-                                                      "http://search.gora.golf.rakuten.co.jp/cal/disp/c_id/200052"),
-                                        new PostbackAction("Reviews",
-                                                           "http://booking.gora.golf.rakuten.co.jp/voice/detail/c_id/200052")
-                                )));
          cl.add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
                                         new URIAction("Go to line.me",
                                                       "https://line.me"),
                                         new PostbackAction("Say hello1",
                                                            "hello こんにちは")
                                 )));
+         
+         cl.add(new CarouselColumn("http://gora.golf.rakuten.co.jp/img/golf/200052/photo1.jpg", "中軽井沢カントリークラブ", "軽井沢", Arrays.asList(
+                                        new URIAction("Book",
+                                                      "http://search.gora.golf.rakuten.co.jp/cal/disp/c_id/200052"),
+                                        new PostbackAction("Reviews",
+                                                           "http://booking.gora.golf.rakuten.co.jp/voice/detail/c_id/200052")
+                                )));
+
+         
+        
                   
                  
          log.info("CL-2: {}", cl);
