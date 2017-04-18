@@ -315,7 +315,7 @@ public class App {
 		        String content =  EntityUtils.toString(respEntity);
 		        ArrayList<GObj> list = new ArrayList<>();
 		        list = convertIntoJson(content);
-		        log.info("Response From Gora String: {}", content);
+		        log.info("Response From Gora String: {}", list);
 		        
 		        handleCarouselContent(list, replyToken);
 		    }
@@ -437,6 +437,8 @@ public class App {
 	private void handleCarouselContent(ArrayList<GObj> content, String replyToken){
 		 String imageUrl = createUri("/static/buttons/1040.jpg");
          ArrayList<CarouselColumn> cl = new ArrayList<>();
+
+         JsonObject jo = new 
          log.info("CL-1: {}", cl);
          /*for(int i=0;i<content.size();i++){
         	 GObj go = content.get(i);
@@ -452,6 +454,27 @@ public class App {
          }*/
 
          cl. add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                        new URIAction("Go to line.me",
+                                                      "https://line.me"),
+                                        new PostbackAction("Say hello1",
+                                                           "hello こんにちは")
+                                )));
+
+                  cl. add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                        new URIAction("Go to line.me",
+                                                      "https://line.me"),
+                                        new PostbackAction("Say hello1",
+                                                           "hello こんにちは")
+                                )));
+
+                           cl. add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                        new URIAction("Go to line.me",
+                                                      "https://line.me"),
+                                        new PostbackAction("Say hello1",
+                                                           "hello こんにちは")
+                                )));
+
+                                    cl. add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
                                         new URIAction("Go to line.me",
                                                       "https://line.me"),
                                         new PostbackAction("Say hello1",
