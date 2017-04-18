@@ -258,19 +258,19 @@ public class App {
 		String nodesVisitedText = formatToString(response.getOutput().get("nodes_visited"));
 		String inputText = formatToString(response.getInputText());
 		Object responseFromGora = null;
-		if (nodesVisitedText.equals("item_search_request_confirmed_")) {
+		if (nodesVisitedText.contains("item_search_request_confirmed_")) {
 			if (inputText.toLowerCase().equals("yes")) {
 				String itemToIchiba = formatToString(response.getContext().get("item"));
 				String genderToIchiba = formatToString(response.getContext().get("gender"));
 				log.info("Item: {}", itemToIchiba);
 				log.info("Gender: {}", genderToIchiba);
 			}
-		}else if(nodesVisitedText.equals("item_search_request_confirmed")){
+		}else if(nodesVisitedText.contains("item_search_request_confirmed")){
 			if (inputText.toLowerCase().equals("yes")) {
 				String itemToIchiba = formatToString(response.getContext().get("item"));
 				log.info("Item: {}", itemToIchiba);
 			}
-		}else if (nodesVisitedText.equals("golf_search_request_confirmed")){
+		}else if (nodesVisitedText.contains("golf_search_request_confirmed")){
 			if (inputText.toLowerCase().equals("yes")) {
 				String dateToGora = formatToString(response.getContext().get("date"));
 				String placeToGora = formatToString(response.getContext().get("place"));
