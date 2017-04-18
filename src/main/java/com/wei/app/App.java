@@ -439,7 +439,6 @@ public class App {
          ArrayList<CarouselColumn> cl = new ArrayList<>();
 
 
-         JsonObject jo = new 
          log.info("CL-1: {}", cl);
          GObj go = content.get(0);
 
