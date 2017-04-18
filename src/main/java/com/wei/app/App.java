@@ -254,7 +254,7 @@ public class App {
 		log.info("Watson's response: {}", response);
 		// System.out.println(response);
 
-		log.info("Watson's output: {}", response.getOutput().get("nodes_visited"));
+		log.info("Watson's nodes_visited: {}", response.getOutput().get("nodes_visited"));
 		String nodesVisitedText = formatToString(response.getOutput().get("nodes_visited"));
 		String inputText = formatToString(response.getInputText());
 		Object responseFromGora = null;
@@ -450,6 +450,13 @@ public class App {
         	
         	 cl.add(new CarouselColumn(go.picture, go.name, go.desc,al));
          }
+
+         cl. add(new CarouselColumn(imageUrl, "hoge", "fuga", Arrays.asList(
+                                        new URIAction("Go to line.me",
+                                                      "https://line.me"),
+                                        new PostbackAction("Say hello1",
+                                                           "hello こんにちは")
+                                )));
          log.info("CL-2: {}", cl);
 		 CarouselTemplate carouselTemplate = new CarouselTemplate(cl);
          TemplateMessage templateMessage = new TemplateMessage("Carousel alt text", carouselTemplate);
