@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class GObj {
 
-	public String name,desc,picture,rating;
+	public String name,desc,picture,rating, review_url, book_url;
 
 	public GObj(String name, String desc, String picture, String rating) {
 		
@@ -12,7 +12,8 @@ public class GObj {
 		this.desc = desc;
 		this.picture = picture;
 		this.rating = rating;
-		planslist = new ArrayList<>();
+
+		//planslist = new ArrayList<>();
 	}
 	
 	public ArrayList<Gplan> planslist;
